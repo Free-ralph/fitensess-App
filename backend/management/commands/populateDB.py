@@ -22,7 +22,7 @@ class Command(BaseCommand):
 		'X-RapidAPI-Key': RAPID_API_KEY,
 		'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
 	    }
-        response = requests.get(url, headers=headers)
+        response = requests.get('GET', url, headers=headers)
         if response.status_code == amount:
             response_data = response.json()
             for count, data in enumerate(response_data):
