@@ -4,8 +4,11 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from backend.models import Exercise, BodyPart
 import requests
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
-RAPID_API_KEY = settings.RAPID_API_KEY
+RAPID_API_KEY = env('RAPID_API_KEY')
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('amount', type = int, help = 'How many records do you want sire')
