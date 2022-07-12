@@ -4,26 +4,17 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from backend.models import Exercise, BodyPart
 import requests
-import environ
-env = environ.Env()
-environ.Env.read_env()
 
-RAPID_API_KEY = env('RAPID_API_KEY')
-print(RAPID_API_KEY)
+RAPID_API_KEY = settings.RAPID_API_KEY
 class Command(BaseCommand):
-    def add_arguments(self, parser):
-        parser.add_argument('amount', type = int, help = 'How many records do you want sire')
-        
-
     def handle(self, *args, **options):
-        amount = options['amount']
         url = 'https://exercisedb.p.rapidapi.com/exercises'
         headers = {
 		'X-RapidAPI-Key': RAPID_API_KEY,
 		'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
 	    }
-        response = requests.get('GET', url, headers=headers)
-        if response.status_code == amount:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
             response_data = response.json()
             for count, data in enumerate(response_data):
                 body_part_qs = BodyPart.objects.filter(name = data['bodyPart'])
@@ -40,8 +31,8 @@ class Command(BaseCommand):
                     name = data['name'], 
                     target = data['target']
                 )
-                if count == amount:
-                    break
+                # if count == 500:
+                #     break
             self.stdout.write(self.style.SUCCESS('database populated succesfully'))
         else:
             raise CommandError('data fetch failed')
