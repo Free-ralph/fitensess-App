@@ -1,7 +1,5 @@
 from .base import *
 
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 DATABASES = {
@@ -16,7 +14,7 @@ DATABASES = {
 
         'PASSWORD': env('DATABASE_PASSWORD'),
 
-        'HOST': env('DATABASE_HOST'),
+        'HOST': 'localhost',
 
         'PORT': '5432',
 
