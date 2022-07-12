@@ -3,7 +3,7 @@ import django_heroku
 import os
 
 ALLOWED_HOSTS = []
-
+print('using prod')
 
 # Debugging in heroku live
 LOGGING = {
