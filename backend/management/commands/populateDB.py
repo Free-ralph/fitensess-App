@@ -9,6 +9,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 RAPID_API_KEY = env('RAPID_API_KEY')
+print(RAPID_API_KEY)
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('amount', type = int, help = 'How many records do you want sire')
