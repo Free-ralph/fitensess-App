@@ -1,5 +1,3 @@
-from codeop import CommandCompiler
-from email import header
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from backend.models import Exercise, BodyPart
@@ -31,8 +29,8 @@ class Command(BaseCommand):
                     name = data['name'], 
                     target = data['target']
                 )
-                # if count == 500:
-                #     break
+                if count == 1000:
+                    break
             self.stdout.write(self.style.SUCCESS('database populated succesfully'))
         else:
             raise CommandError('data fetch failed')
