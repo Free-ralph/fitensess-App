@@ -2,7 +2,7 @@ from .base import *
 import django_heroku 
 import os
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['https://fitness-app-zo1o.onrender.com', 'fitness-app-zo1o.onrender.com']
 
 # Debugging in heroku live
 LOGGING = {
